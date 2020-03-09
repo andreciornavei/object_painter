@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Painter</title>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #room {
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .tools {
+            display: flex;
+            flex-direction: column;
+            width: 400px !important;
+            margin-top: 20px;
+        }
+
+        .pickers {
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+        }
+
+        .picker {
+            padding: 10px;
+            flex-grow: 1;
+        }
+
+        .picker>label {
+            display: block;
+            text-align: center;
+            width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12;
+            font-weight: bold;
+            color: #666666;
+            margin-bottom: 10px;
+        }
+
+        .colors {
+            display: block;
+        }
+
+        .colors>div {
+            width: 22px;
+            height: 22px;
+            border: 3px solid white;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+            border-radius: 100%;
+            background-color: #f4f4f4;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        select {
+            border: 2px solid #d8d8d8;
+            color: #666666;
+            font-size: 14px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="400" height="300" id="room"></canvas>
+    <div class="tools">
+        <select onchange="selectfit(this)">
+            <option value="stretch">Stretch</option>
+            <option value="contain">Contain</option>
+            <option value="cover">Cover</option>
+        </select>
+        <div class="pickers">
+            <div class="picker">
+                <label>Wall</label>
+                <div class="colors">
+                    <div style="background-color: #ffcdd2;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #F8BBD0;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #E1BEE7;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #D1C4E9;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #B3E5FC;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #C8E6C9;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #FFECB3;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #FFE0B2;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #D7CCC8;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #F5F5F5;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #CFD8DC;" onclick="selectcolor('wall',this)"></div>
+                    <div style="background-color: #ffffff;" onclick="selectcolor('wall',this)"></div>
+                </div>
+            </div>
+            <div class="picker">
+                <label>Couch</label>
+                <div class="colors">
+                    <div style="background-color: #f44336;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #E91E63;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #9C27B0;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #03A9F4;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #009688;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #8BC34A;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #FFC107;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #FF5722;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #795548;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #9E9E9E;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #607D8B;" onclick="selectcolor('couch',this)"></div>
+                    <div style="background-color: #ffffff;" onclick="selectcolor('couch',this)"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./../src/object_painter.js"></script>
+    <script>
+
+        const objectPainter = new ObjectPainter({
+            canvasId: "room",
+            fit: "stretch"
+        });
+
+        objectPainter.loadBackground('./../example/assets/images/room.jpg')
+        objectPainter.addLayer('wall', './../example/assets/images/room_wall.png')
+        objectPainter.addLayer('couch', './../example/assets/images/room_couch.png')
+
+        function selectfit(element) {
+            objectPainter.setFit(element.value)
+        }
+
+        function selectcolor(layer, element) {
+            objectPainter.setLayerColor(layer, element.style.backgroundColor)
+        }
+
+        function getData(){
+            const data = objectPainter.getData()
+            console.log(data)
+        }
+
+    </script>
+</body>
+
+</html>

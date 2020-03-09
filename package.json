@@ -1,0 +1,32 @@
+{
+  "name": "object_painter",
+  "version": "1.0.0",
+  "description": "A javascript library to paint objects with canvas",
+  "main": "src/object_painter.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreciornavei/object_painter.git"
+  },
+  "keywords": [
+    "javascript",
+    "paint",
+    "painter",
+    "canvas",
+    "library"
+  ],
+  "author": "André Ciornavei <andre.ciornavei@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andreciornavei/object_painter/issues"
+  },
+  "homepage": "https://github.com/andreciornavei/object_painter#readme",
+  "devDependencies": {
+    "http-server": "^0.12.1"
+  }
+}
